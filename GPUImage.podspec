@@ -1,21 +1,19 @@
 Pod::Spec.new do |s|
- s.name = 'GPUImage'
- s.version = '0.1.7'
- s.source = { :git => "https://github.com/9count/GPUImage2.git" }
- s.ios.deployment_target = '9.0'
- s.osx.deployment_target = '10.10'
- s.watchos.deployment_target = '2.0'
- s.tvos.deployment_target = '9.0'
- s.requires_arc = true
- s.homepage = 'https://github.com/BradLarson/GPUImage2'
- s.summary = '9count branch of Brad Larsons GPUImage2'
- s.authors = { "Brad Larson" => "contact@sunsetlakesoftware.com" }
- 
- s.default_subspec = "Core"
- s.subspec "Core" do |ss|
-     ss.source_files  = "Sources/*.swift"
-     ss.framework  = "Foundation"
- end
- 
- end
+  s.name     = 'GPUImage2'
+  s.version  = '0.1.0'
+  s.license  = 'BSD'
+  s.summary  = 'An open source iOS framework for GPU-based image and video processing.'
+  s.homepage = 'https://github.com/BradLarson/GPUImage2'
+  s.author   = { 'Brad Larson' => 'contact@sunsetlakesoftware.com' }
 
+  s.source   = { :git => 'https://github.com/9count/GPUImage2.git' }
+
+  s.source_files = 'framework/Source/**/*.{swift}'
+  s.resources = 'framework/Source/Operations/Shaders/*.{fsh}'
+  s.requires_arc = true
+  s.xcconfig = { 'CLANG_MODULES_AUTOLINK' => 'YES', 'OTHER_SWIFT_FLAGS' => "$(inherited) -DGLES"}
+
+  s.ios.deployment_target = '8.0'
+  s.ios.exclude_files = 'framework/Source/Mac', 'framework/Source/Linux', 'framework/Source/Operations/Shaders/ConvertedShaders_GL.swift'
+  s.frameworks   = ['OpenGLES', 'CoreMedia', 'QuartzCore', 'AVFoundation']
+end
